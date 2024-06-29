@@ -14,6 +14,16 @@ import br.edu.atitus.denguealerta.components.AuthToken;
 public class ConfigSecurity {
 	
 	@Bean
+    WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/*").allowedOrigins("");
+			}
+		};
+	}
+	
+	@Bean
 	SecurityFilterChain getSecurity(HttpSecurity http, AuthToken authToken) throws Exception {
 		http
 			.csrf(csrf -> csrf.disable())
